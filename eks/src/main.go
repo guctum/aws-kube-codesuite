@@ -114,8 +114,10 @@ func handler(context context.Context, req events.CodePipelineEvent) {
 		return
 	}
 
+
+	// Inject env variable here - this variable is configured from AWS Lambda
 	cfg := &eksauth.ClusterConfig{
-		ClusterName: d.ClusterName,
+		ClusterName: os.Getenv("ClusterName"),
 	}
 
 	clientset, err := eksauth.NewAuthClient(cfg)
